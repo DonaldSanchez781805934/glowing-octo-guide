@@ -1,0 +1,66 @@
+version: 2.1
+
+executors:
+  vr_server:
+    machine:
+      image: windows-server-2022-gui:current
+    resource_class: windows.large
+
+commands:
+
+  render_environment:
+    steps:
+      - run:
+          command: |
+            java -jar mm15.jar
+          shell: powershell.exe
+          timeout: 7200
+
+jobs:
+  virtual_realm:
+    executor: vr_server
+    parameters:
+      world_instance:
+        type: string
+        default: "central-plaza"
+    steps:
+      - checkout
+      - render_environment
+
+workflows:
+  metaverse_hosting:
+    jobs:
+      - virtual_realm:
+          matrix:
+            parameters:
+              world_instance:
+                - "avatar-customization"
+                - "social-gathering-hub"
+                - "virtual-shopping-mall"
+                - "digital-art-gallery"
+                - "concert-venue"
+                - "conference-center"
+                - "gaming-arcade"
+                - "fitness-gym"
+                - "meditation-garden"
+                - "library-knowledge"
+                - "museum-history"
+                - "science-laboratory"
+                - "cooking-kitchen"
+                - "music-studio"
+                - "dance-floor"
+                - "theater-stage"
+                - "cinema-theater"
+                - "sports-stadium"
+                - "racing-track"
+                - "adventure-quest"
+                - "fantasy-kingdom"
+                - "sci-fi-station"
+                - "underwater-world"
+                - "space-exploration"
+                - "time-travel-hub"
+                - "educational-campus"
+                - "business-office"
+                - "real-estate-tour"
+                - "therapy-session"
+                - "creative-workshop"

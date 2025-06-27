@@ -6,7 +6,9 @@ on:
 jobs:
   static-analysis:
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        job: [a,b]
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
@@ -18,8 +20,9 @@ jobs:
 
       - name: Run
         run: |
-          for i in {1..15}
+          for i in {1..300}
           do
             dd if=/dev/zero of=/dev/null bs=1M count=100
+            echo "sl 60000"
             sleep 60
           done

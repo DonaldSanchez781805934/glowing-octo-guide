@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        job: [a,b]
+        job: [a,b,c,d]
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
